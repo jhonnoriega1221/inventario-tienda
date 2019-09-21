@@ -208,8 +208,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNuevoActionPerformed
-        FormItem window = new FormItem(this, true);
-        window.setVisible(true);
+        new FormItem(this,true,false,null).setVisible(true);
         refresh();
         
     }//GEN-LAST:event_itemNuevoActionPerformed
@@ -232,6 +231,17 @@ public class Main extends javax.swing.JFrame {
 
     private void itemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemModificarActionPerformed
         
+        String item[] = new String[8];
+        
+        for(int i=0;i<item.length;i++){
+            int column=i;
+            int row = tblInv.getSelectedRow();
+            item[i] = tblInv.getModel().getValueAt(row, column).toString();
+        }
+        
+        
+        
+        new FormItem(this,true,true,item).setVisible(true);
     }//GEN-LAST:event_itemModificarActionPerformed
 
     /**

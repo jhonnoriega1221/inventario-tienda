@@ -6,10 +6,10 @@ public class Item {
     
     //  --- Atributos ---
     String codigo, nombre, marca, categoria, estado, ubicacion, fecha;
-    String stock;
+    int stock;
 
     // --- Constructor ---
-    public Item(String codigo, String nombre, String marca, String categoria, String estado, String ubicacion, String fecha, String stock) {
+    public Item(String codigo, String nombre, String marca, String categoria, String estado, String ubicacion, String fecha, int stock) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.marca = marca;
@@ -80,11 +80,11 @@ public class Item {
         this.fecha = fecha;
     }
 
-    public String getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
     
@@ -96,12 +96,11 @@ public class Item {
         
     }
     
-    public void eliminarItem(String v){
-        ArchivoItem.borrarItem(v);
+    public void eliminarItem(String removeTerm){
+        ArchivoItem.borrarItem(removeTerm);
     }
     
-    /*public void modificarItem(String v, String c, String cat, String est, String f, String m, String nom, String stock, String u){
-        ArchivoItem.modificarItem(v,c,cat,est,f,m,nom,stock,u);
+    public void modificarItem(String editTerm, String newCode, String newCat, String newDate, String newBrand, String newName, String newLoc, String newStatus){
+        ArchivoItem.editarItem(editTerm, newCode, newCat, newDate, newBrand, newName, newLoc, newStatus);
     }
-    */
 }

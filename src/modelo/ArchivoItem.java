@@ -70,6 +70,75 @@ public class ArchivoItem {
         
     }
     
+    public static void editarItem(String editTerm, String newCode, String newCat, String newDate, String newBrand, String newName, String newLoc, String newStatus){
+        try{
+            File f=new File("src/modelo/item.txt");
+            if(f.exists()){
+                FileReader fr = new FileReader(f);
+                BufferedReader br = new BufferedReader(fr);
+                
+                String linea;
+                int numLineas = 0;
+                
+                while((linea = br.readLine()) != null){
+                    numLineas++;
+                }
+                
+                String items[] = new String[numLineas];
+                br = new BufferedReader(new FileReader(f));
+                int contador = 0;
+                
+                while((linea = br.readLine()) != null){
+                    items[contador] = linea;
+                    contador++;
+                }
+                
+                br.close();
+                br.close();
+                FileWriter fw = new FileWriter(f); //AQUI SE ELIMINA TOD
+                
+                BufferedWriter bw = new BufferedWriter(fw);
+                for(int i=0 ; i<items.length ; i++){
+                    System.out.println("asas");
+                    String columna[] = items[i].split("%");
+                    
+                    if(columna[0].equals(editTerm)){
+                        columna[0] = newCode;
+                        columna[1] = newName;
+                        columna[2] = newBrand;
+                        columna[3] = newCat;
+                      //columna[4] = columna[4];
+                        columna[5] = newStatus;
+                        columna[6] = newLoc;
+                        columna[7] = newDate;
+                        
+                        bw.write(columna[0]+"%"+
+                                 columna[1]+"%"+
+                                 columna[2]+"%"+
+                                 columna[3]+"%"+
+                                 columna[4]+"%"+
+                                 columna[5]+"%"+
+                                 columna[6]+"%"+
+                                 columna[7]);
+                        
+                        bw.newLine();
+                    }
+                    else{
+                        bw.write(items[i]);
+                        bw.newLine();
+                    }
+                }
+                bw.close();
+                fw.close();
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "No hay items para modificar");
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     
     public DefaultTableModel mostrarInv(){
         Vector cabeceras = new Vector();

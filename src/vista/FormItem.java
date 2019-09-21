@@ -15,6 +15,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
  */
 public class FormItem extends javax.swing.JDialog {
     boolean mod;
+    String value[] = new String[8];
     /**
      * Creates new form addItem
      */
@@ -23,10 +24,36 @@ public class FormItem extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-    public FormItem(Boolean mod){
-        this.mod = mod;
+    public FormItem(java.awt.Frame parent, boolean modal, Boolean mod, String[] value) {
+        super(parent, modal);
+        initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        this.mod=mod;
+        if(mod){
+            setDataForms(value);
+            for(int i=0;i<value.length;i++){
+                this.value[i]=value[i];
+            }
+        }
+        else{
+            txtStock.setEnabled(true);
+        }
     }
+   
+    
+    public void setDataForms(String value[]){
+        txtCodigo.setText(value[0]);
+        txtNombre.setText(value[1]);
+        txtMarca.setText(value[2]);
+        txtCategoria.setText(value[3]);
+        txtStock.setText(value[4]);
+        txtEstado.setText(value[5]);
+        txtUbicacion.setText(value[6]);
+        txtFecha.setText(value[7]);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +81,7 @@ public class FormItem extends javax.swing.JDialog {
         txtUbicacion = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
+        btnSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,14 +97,16 @@ public class FormItem extends javax.swing.JDialog {
 
         lblStock.setText("Stock");
 
+        txtStock.setEnabled(false);
+
         lblUbicacion.setText("Ubicación");
 
         lblFecha.setText("Fecha");
 
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnSubmit.setText("Enviar");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnSubmitActionPerformed(evt);
             }
         });
 
@@ -117,7 +146,7 @@ public class FormItem extends javax.swing.JDialog {
                                         .addComponent(txtStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(pnlAddLayout.createSequentialGroup()
                         .addGap(164, 164, 164)
-                        .addComponent(btnAgregar)))
+                        .addComponent(btnSubmit)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlAddLayout.setVerticalGroup(
@@ -156,7 +185,7 @@ public class FormItem extends javax.swing.JDialog {
                     .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addComponent(btnAgregar)
+                .addComponent(btnSubmit)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -174,30 +203,38 @@ public class FormItem extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
-        /*if(mod){
-            Item Item = new Item();
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        if(mod){ //Si se vamodificar
             
-            Item.modificarItem(v, c, cat, est, f, m, nom, stock, u);
+            Item item = new Item();
+            item.modificarItem(value[0],
+                               txtCodigo.getText(),
+                               txtCategoria.getText(),
+                               txtFecha.getText(),
+                               txtMarca.getText(),
+                               txtNombre.getText(),
+                               txtUbicacion.getText(),
+                               txtEstado.getText());
+            super.dispose();
+            JOptionPane.showMessageDialog(null, "Producto modificado");
             
-        }else{*/
-            Item Item = new Item();
+            
+        }else{ //Si se vañadir
+            Item item = new Item();
 
-            Item.insertarItem(txtCodigo.getText(),
+            item.insertarItem(txtCodigo.getText(),
                               txtCategoria.getText(),
                               txtEstado.getText(),
                               txtFecha.getText(),
                               txtMarca.getText(),
                               txtNombre.getText(),
                               txtStock.getText(),
-                              txtUbicacion.getText()
-            );
+                              txtUbicacion.getText());
             super.dispose();
-            JOptionPane.showMessageDialog(null, "Producto agregado exitosamente");
+            JOptionPane.showMessageDialog(null, "Producto agregado");
 
-        //}
-    }//GEN-LAST:event_btnAgregarActionPerformed
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,7 +280,7 @@ public class FormItem extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblEstado;
