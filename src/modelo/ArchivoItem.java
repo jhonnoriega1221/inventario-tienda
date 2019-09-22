@@ -93,13 +93,12 @@ public class ArchivoItem {
                     contador++;
                 }
                 
-                br.close();
+                fr.close();
                 br.close();
                 FileWriter fw = new FileWriter(f); //AQUI SE ELIMINA TOD
                 
                 BufferedWriter bw = new BufferedWriter(fw);
                 for(int i=0 ; i<items.length ; i++){
-                    System.out.println("asas");
                     String columna[] = items[i].split("%");
                     
                     if(columna[0].equals(editTerm)){

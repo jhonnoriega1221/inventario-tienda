@@ -26,8 +26,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        inventario = new DefaultTableModel(); //Instanciamos el list model
-        tblInv.setModel(inventario);        //Asinamos el list model al lst del jswing
+        inventario = new DefaultTableModel(); //Instanciamos el table model
+        tblInv.setModel(inventario);        //Asignamos el table model al tbl del jswing
         
         setLocationRelativeTo(null); //CENTRAR VENTANA
         
@@ -239,9 +239,8 @@ public class Main extends javax.swing.JFrame {
             item[i] = tblInv.getModel().getValueAt(row, column).toString();
         }
         
-        
-        
         new FormItem(this,true,true,item).setVisible(true);
+        refresh();
     }//GEN-LAST:event_itemModificarActionPerformed
 
     /**
