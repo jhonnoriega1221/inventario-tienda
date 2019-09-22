@@ -7,6 +7,7 @@ public class Item {
     //  --- Atributos ---
     String codigo, nombre, marca, categoria, estado, ubicacion, fecha;
     int stock;
+
     // --- Constructor ---
     public Item(String codigo, String nombre, String marca, String categoria, String estado, String ubicacion, String fecha, int stock) {
         this.codigo = codigo;
@@ -90,6 +91,7 @@ public class Item {
     //  ---  Meto2  ---
     
     public void insertarItem(String c, String cat, String est, String f, String m, String nom, String stock, String u){
+        
         ArchivoItem.escribirItem(c,cat,est,f,m,nom,stock,u);
         
     }

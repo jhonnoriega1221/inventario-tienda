@@ -27,18 +27,17 @@ public class FormItem extends javax.swing.JDialog {
     public FormItem(java.awt.Frame parent, boolean modal, Boolean mod, String[] value) {
         super(parent, modal);
         initComponents();
+        
         setLocationRelativeTo(null);
         
         this.mod=mod;
         if(mod){
-            btnSubmit.setText("Editar item");
             setDataForms(value);
             for(int i=0;i<value.length;i++){
                 this.value[i]=value[i];
             }
         }
         else{
-            btnSubmit.setText("Agregar item");
             txtStock.setEnabled(true);
         }
     }
@@ -104,6 +103,7 @@ public class FormItem extends javax.swing.JDialog {
 
         lblFecha.setText("Fecha");
 
+        btnSubmit.setText("Enviar");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
@@ -186,7 +186,7 @@ public class FormItem extends javax.swing.JDialog {
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addComponent(btnSubmit)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
