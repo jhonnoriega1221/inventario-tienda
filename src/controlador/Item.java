@@ -100,7 +100,16 @@ public class Item {
         ArchivoItem.borrarItem(removeTerm);
     }
     
-    public void modificarItem(String editTerm, String newCode, String newCat, String newDate, String newBrand, String newName, String newLoc, String newStatus){
+    public void modificarItem(String editTerm,
+                              String newCode,
+                              String newCat,
+                              String newDate,
+                              String newBrand,
+                              String newName,
+                              String newLoc,
+                              String newStatus){
+        
         ArchivoItem.editarItem(editTerm, newCode, newCat, newDate, newBrand, newName, newLoc, newStatus);
+        
     }
 }
