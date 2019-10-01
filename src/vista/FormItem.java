@@ -6,8 +6,11 @@
 package vista;
 
 import controlador.Item; //IMPORTADO EL CONTROLADOR ITEM
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.table.DefaultTableModel;
+import modelo.ArchivoItem;
 
 /**
  *
@@ -204,6 +207,7 @@ public class FormItem extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        ArchivoItem ai = new ArchivoItem();
         if(mod){ //Si se vamodificar
             
             Item item = new Item();
@@ -221,8 +225,21 @@ public class FormItem extends javax.swing.JDialog {
             
         }else{ //Si se vañadir
             Item item = new Item();
-
-            item.insertarItem(txtCodigo.getText(),
+            String Codigoitem = "";
+            String CodigoTxt = txtCodigo.getText();
+            DefaultTableModel Array = ai.mostrarInv();
+            for (int i = 0; i < Array.getRowCount(); i++) {                
+                Codigoitem = Array.getValueAt(i, 0).toString();                
+                
+                if (CodigoTxt.equals(Codigoitem)){
+                    JOptionPane.showMessageDialog(null, "ya existe un Producto con este codigo", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                    return;                    
+                }
+            }            
+            System.out.println(CodigoTxt + "\n" + Codigoitem);
+            
+            if (!Codigoitem.equals(CodigoTxt) && !CodigoTxt.equals("")) {
+                item.insertarItem(txtCodigo.getText(),
                               txtCategoria.getText(),
                               txtEstado.getText(),
                               txtFecha.getText(),
@@ -230,8 +247,9 @@ public class FormItem extends javax.swing.JDialog {
                               txtNombre.getText(),
                               txtStock.getText(),
                               txtUbicacion.getText());
-            super.dispose();
-            JOptionPane.showMessageDialog(null, "Producto agregado");
+                super.dispose();
+                JOptionPane.showMessageDialog(null, "Producto agregado");
+            }    
 
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
